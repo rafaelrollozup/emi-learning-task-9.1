@@ -7,13 +7,20 @@
 
 import UIKit
 
+protocol NovoIngredienteViewControllerDelegate: AnyObject {
+    func novoIngredienteViewController(_ controller: NovoIngredienteViewController,
+                                       adicionou ingrediente: Ingrediente)
+}
+
 class NovoIngredienteViewController: UIViewController {
 
     typealias MensagemDeValidacao = String
     
-    @IBOutlet private weak var nomeLabel: UITextField!
-    @IBOutlet private weak var simboloLabel: UITextField!
-    @IBOutlet private weak var quantidadeLabel: UITextField!
+    @IBOutlet private weak var nomeTextField: UITextField!
+    @IBOutlet private weak var simboloTextField: UITextField!
+    @IBOutlet private weak var quantidadeTextField: UITextField!
+    
+    weak var delegate: NovoIngredienteViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +38,15 @@ class NovoIngredienteViewController: UIViewController {
     }
     
     func formularioEhValido() -> (Bool, MensagemDeValidacao?) {
-        if let nome = nomeLabel.text, nome.isEmpty {
+        if let nome = nomeTextField.text, nome.isEmpty {
             return (false, "Informe um nome para o ingrediente.")
         }
         
-        if let simbolo = simboloLabel.text, simbolo.isEmpty {
+        if let simbolo = simboloTextField.text, simbolo.isEmpty {
             return (false, "Informe o emoji símbolo para o ingrediente.")
         }
         
-        if let quantidade = quantidadeLabel.text, quantidade.isEmpty {
+        if let quantidade = quantidadeTextField.text, quantidade.isEmpty {
             return (false, "Informe a descrição da quantidade para o item.")
         }
         
@@ -47,11 +54,12 @@ class NovoIngredienteViewController: UIViewController {
     }
 
     func adicionaIngrediente() {
-        let ingrediente = Ingrediente(simbolo: simboloLabel.text!,
-                                      nome: nomeLabel.text!,
-                                      quantidade: quantidadeLabel.text!)
+        let ingrediente = Ingrediente(simbolo: simboloTextField.text!,
+                                      nome: nomeTextField.text!,
+                                      quantidade: quantidadeTextField.text!)
                 
-        // e agora josé ?
+        delegate?.novoIngredienteViewController(self, adicionou: ingrediente)
+        self.dismiss(animated: true)
     }
     
 }

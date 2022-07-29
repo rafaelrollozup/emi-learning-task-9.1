@@ -435,9 +435,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="horarioLabel" destination="qp2-i0-d2R" id="ioQ-DH-Ygb"/>
+                        <outlet property="horarioTextField" destination="qp2-i0-d2R" id="ioQ-DH-Ygb"/>
                         <outlet property="ingredientesTableView" destination="qJo-9S-uPY" id="Gvd-ih-dau"/>
-                        <outlet property="tituloLabel" destination="6fP-3X-wk3" id="uKs-zc-lPw"/>
+                        <outlet property="tituloTextField" destination="6fP-3X-wk3" id="uKs-zc-lPw"/>
                         <outletCollection property="perfilButtons" destination="N43-6g-Er4" collectionClass="NSMutableArray" id="qzZ-NP-KOh"/>
                         <outletCollection property="perfilButtons" destination="FYd-In-3Kp" collectionClass="NSMutableArray" id="Ut8-AC-gu3"/>
                         <outletCollection property="perfilButtons" destination="Uxt-Nt-szK" collectionClass="NSMutableArray" id="PR1-5l-ptZ"/>
@@ -585,9 +585,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="nomeLabel" destination="AG5-Ak-VOg" id="M2D-i8-VGm"/>
-                        <outlet property="quantidadeLabel" destination="6Gt-05-B09" id="DWW-EZ-xpl"/>
-                        <outlet property="simboloLabel" destination="RPu-xC-8gg" id="WTX-8F-7pF"/>
+                        <outlet property="nomeTextField" destination="AG5-Ak-VOg" id="M2D-i8-VGm"/>
+                        <outlet property="quantidadeTextField" destination="6Gt-05-B09" id="DWW-EZ-xpl"/>
+                        <outlet property="simboloTextField" destination="RPu-xC-8gg" id="WTX-8F-7pF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iU2-4L-x9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -695,6 +695,11 @@
             <point key="canvasLocation" x="36" y="80"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="bf7-4c-3Sg">
+            <size key="intrinsicContentSize" width="0.0" height="64"/>
+        </designable>
+    </designables>
     <resources>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="plus" catalog="system" width="128" height="113"/>
@@ -705,7 +710,7 @@
             <color red="0.98431372549019602" green="0.9882352941176471" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White Lilac">
-            <color red="0.96470588235294119" green="0.97254901960784312" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.9649999737739563" green="0.97299998998641968" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

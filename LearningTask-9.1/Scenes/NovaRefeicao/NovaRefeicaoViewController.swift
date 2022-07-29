@@ -7,14 +7,21 @@
 
 import UIKit
 
+protocol NovaRefeicaoViewControllerDelegate: AnyObject {
+    func novaRefeicaoViewController(_ controller: NovaRefeicaoViewController,
+                                    adicionou refeicao: Refeicao)
+}
+
 class NovaRefeicaoViewController: UIViewController {
     
     typealias MensagemDeValidacao = String
     
     @IBOutlet var perfilButtons: [UIButton]!
-    @IBOutlet weak var tituloLabel: UITextField!
-    @IBOutlet weak var horarioLabel: UITextField!
+    @IBOutlet weak var tituloTextField: UITextField!
+    @IBOutlet weak var horarioTextField: UITextField!
     @IBOutlet weak var ingredientesTableView: UITableView!
+    
+    weak var delegate: NovaRefeicaoViewControllerDelegate?
     
     var perfilSelecionado: Int = 1 {
         didSet {
@@ -55,11 +62,11 @@ class NovaRefeicaoViewController: UIViewController {
     }
     
     func formularioEhValido() -> (Bool, MensagemDeValidacao?) {
-        if let titulo = tituloLabel.text, titulo.isEmpty {
+        if let titulo = tituloTextField.text, titulo.isEmpty {
             return (false, "Informe um título para a refeição.")
         }
         
-        if let horario = horarioLabel.text, horario.isEmpty {
+        if let horario = horarioTextField.text, horario.isEmpty {
             return (false, "Informe o horário programado para a refeição.")
         }
         
@@ -75,9 +82,29 @@ class NovaRefeicaoViewController: UIViewController {
             button.tag == perfilSelecionado
         }).first!.titleLabel!.text!
         
-        // e agora josé ?
+        let refeicao = Refeicao(simbolo: simbolo, titulo: tituloTextField.text!, horario: horarioTextField.text!, ingredientes: ingredientes)
+        
+        delegate?.novaRefeicaoViewController(self, adicionou: refeicao)
+        self.dismiss(animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "verFormIngredienteSegue" else { return }
+        
+        guard let controllerDestino = segue.destination as? NovoIngredienteViewController else {
+            fatalError("Não foi possível executar a segue \(segue.identifier!)")
+        }
+        
+        controllerDestino.delegate = self
+    }
+    
+}
+
+extension NovaRefeicaoViewController: NovoIngredienteViewControllerDelegate {
+    func novoIngredienteViewController(_ controller: NovoIngredienteViewController,
+                                       adicionou ingrediente: Ingrediente) {
+        ingredientes.append(ingrediente)
+    }
 }
 
 extension NovaRefeicaoViewController: UITableViewDataSource {
